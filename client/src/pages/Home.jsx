@@ -7,7 +7,7 @@ import Newsletter from "../components/Newsletter"
 function Home() {
   return (
     <>
-      <Navbar/>
+     
       <Header/>
       <BlogList/>
       <Newsletter/>

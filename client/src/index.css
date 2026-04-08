@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* 🔥 Arabic font (better readability) */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+/* Default (English) */
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+/* ✅ Arabic Mode */
+html[dir="rtl"] * {
+  font-family: "Cairo", sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@theme {
+  --color-primary: #5044E5;
+}
+
+/* ========================= */
+/* Rich Text Styling */
+/* ========================= */
+
+.rich-text {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Paragraph */
+.rich-text p {
+  margin-bottom: 16px;
+  color: #292929;
+}
+
+/* Headings */
+.rich-text h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #252525 !important;
+  margin: 32px 0;
+}
+
+.rich-text h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #252525 !important;
+  margin: 24px 0;
+}
+
+.rich-text h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333 !important;
+  margin: 20px 0;
+}
+
+.rich-text h4 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444 !important;
+  margin: 16px 0;
+}
+
+.rich-text h5 {
+  font-size: 14px;
+  font-weight: 400;
+  color: #555 !important;
+  margin: 12px 0;
+}
+
+.rich-text h6 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #666 !important;
+  margin: 8px 0;
+}
+
+/* Bold */
+.rich-text strong {
+  font-weight: 700;
+}
+
+/* Lists */
+.rich-text ol {
+  margin-left: 30px;
+  list-style-type: decimal;
+}
+
+.rich-text ul {
+  margin-left: 30px;
+  list-style-type: disc;
+}
+
+.rich-text li {
+  margin-bottom: 8px;
+}
+
+/* Links */
+.rich-text a {
+  color: #007AFF;
+}
+
+/* ========================= */
+/* 🔥 Arabic Fixes */
+/* ========================= */
+
+/* RTL direction */
+html[dir="rtl"] .rich-text {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Fix list spacing for Arabic */
+html[dir="rtl"] .rich-text ol,
+html[dir="rtl"] .rich-text ul {
+  margin-right: 30px;
+  margin-left: 0;
+}
+
+/* Better Arabic paragraph spacing */
+html[dir="rtl"] .rich-text p {
+  line-height: 2;
+}
+
+/* Fix headings spacing for Arabic */
+html[dir="rtl"] .rich-text h1,
+html[dir="rtl"] .rich-text h2,
+html[dir="rtl"] .rich-text h3 {
+  text-align: right;
+}
