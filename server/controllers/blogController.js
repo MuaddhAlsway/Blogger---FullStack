@@ -1,6 +1,7 @@
 import ImageKit from "imagekit";
 import fs from "fs";
 import Blog from "../models/Blog.js";
+import Comment from "../models/comment.js";
 
 const imagekit = new ImageKit({
     publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
@@ -72,7 +73,6 @@ export const getAllBlogs = async(req,res) => {
             success: true,
            blogs
         });
-
     } catch(error){
 
          res.json({
@@ -81,4 +81,70 @@ export const getAllBlogs = async(req,res) => {
         });
     }
    
+}
+
+export const getBlogById  = async (req,res) => {
+try{
+    const {blogId} = req.params;
+    const blog = await Blog.findById(blogId)
+    if(!blog){
+        return res.json({success: false, messa1ge:"Blog not found"})
+    }
+    res.json({success: true, blog})
+}
+catch(error){
+    res.json({success: false, message: error.message})
+}
+}
+
+
+export const deleteBlogById  = async (req,res) => {
+try{
+    const {id} = req.body
+    await Blog.findIdAndDelete()
+
+    // Delete all comments associated with the blog
+    await Comment.deleteMany({blog: id});
+    res.json({success: true, message: 'Blog delete successfully'})
+}
+catch(error){
+    res.json({success: false, message: error.message})
+}
+}
+
+
+export const togglePublish = async (req,res) =>{
+    try{
+        const {id} = req.body;
+        const blog = await Blog.findById(id);
+        blog.isPublished = !blog.isPublished;
+        await blog.save();
+         res.json({success: true, message: 'Blog status updated'})
+    } 
+    catch (error){
+        res.json({success: false, message: error.message})
+    }
+}
+
+
+export const addComment = async (req, res) => {
+    try{
+        const {blog, name, content} = req.body
+        await Comment.create({blog, name, content});
+         res.json({success: true, message: 'Comment added for review'})
+    }
+    catch{
+ res.json({success: false, message: error.message})
+    }
+}
+
+export const getBlogComments = async (req, res) => {
+    try{
+        const {blogId} = req.body
+        const comments = await Comment.find({blog: blogId, isAppreoved: true }).sort({createdAt: -1});
+        res.json({success: true, comments})
+    } catch(error){
+        res.json({sucess: false, message: error.message})
+    }
+
 }
